@@ -1,9 +1,10 @@
 let elementArray = [];
 
-function Transfer(leftList, rightList, buttons) {
+function Transfer(leftList, rightList, buttons, elementAddButton) {
   this.leftList = leftList;
   this.rightList = rightList;
   this.buttons = buttons;
+  this.elementAddButton = elementAddButton;
 
   Array.from(leftList.children).forEach(event => {
     event.addEventListener("click", function() {
@@ -22,12 +23,8 @@ function Transfer(leftList, rightList, buttons) {
   this.leftButton = buttons.querySelector(".left");
   this.rightButton.addEventListener("click", moveRight);
   this.leftButton.addEventListener("click", moveLeft);
-  buttons
-    .querySelector(".rightInputButton")
-    .addEventListener("click", moveIndexToRight);
-  buttons
-    .querySelector(".leftInputButton")
-    .addEventListener("click", moveIndexToLeft);
+  this.addButton = elementAddButton.querySelector(".addElement");
+  this.addButton.addEventListener("click", addNewElement);
 
   function moveRight() {
     elementArray.forEach(event => {
@@ -44,9 +41,16 @@ function Transfer(leftList, rightList, buttons) {
     });
   }
 
+  buttons
+    .querySelector(".rightInputButton")
+    .addEventListener("click", moveIndexToRight);
+  buttons
+    .querySelector(".leftInputButton")
+    .addEventListener("click", moveIndexToLeft);
+
   function moveIndexToRight() {
-    const fromInput = parseInt(document.querySelector(".fromInput").value);
-    const toInput = parseInt(document.querySelector(".toInput").value);
+    const fromInput = parseInt(buttons.querySelector(".fromInput").value);
+    const toInput = parseInt(buttons.querySelector(".toInput").value);
     Array.from(leftList.children)
       .slice(fromInput - 1, toInput)
       .forEach(event => {
@@ -54,24 +58,43 @@ function Transfer(leftList, rightList, buttons) {
       });
   }
   function moveIndexToLeft() {
-    const fromInput = parseInt(document.querySelector(".fromInput").value);
-    const toInput = parseInt(document.querySelector(".toInput").value);
+    const fromInput = parseInt(buttons.querySelector(".fromInput").value);
+    const toInput = parseInt(buttons.querySelector(".toInput").value);
     Array.from(rightList.children)
       .slice(fromInput - 1, toInput)
       .forEach(event => {
         leftList.appendChild(event);
       });
   }
+
+  function addNewElement() {
+    const inputValue = elementAddButton.querySelector(".newListInput").value;
+    const listNo = elementAddButton.querySelector("select").value;
+    switch (listNo) {
+      case "list1":
+        const html = `<li></li>`;
+        break;
+      case "list2":
+        break;
+      case "list3":
+        break;
+
+      default:
+        break;
+    }
+  }
 }
 
 const firstPairList = new Transfer(
   document.querySelector(".ullist1"),
   document.querySelector(".ullist2"),
-  document.querySelector(".buttons12")
+  document.querySelector(".buttons12"),
+  document.querySelector(".newElementInput")
 );
 
 const secondPairList = new Transfer(
   document.querySelector(".ullist2"),
   document.querySelector(".ullist3"),
-  document.querySelector(".buttons23")
+  document.querySelector(".buttons23"),
+  document.querySelector(".newElementInput")
 );
