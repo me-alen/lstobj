@@ -1,0 +1,13 @@
+.obj
+{
+	border:1px solid black;
+	width: 100px;
+	float:left;
+	height: 150px;
+	margin:10px;
+}
+
+.rightButton
+{
+	float: right;
+}
