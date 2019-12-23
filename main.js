@@ -44,11 +44,10 @@ function Transfer(leftList, rightList, buttons) {
   function moveIndexToRight() {
     const fromInput = parseInt(document.querySelector(".fromInput").value);
     const toInput = parseInt(document.querySelector(".toInput").value);
-    debugger;
   }
   function moveIndexToLeft() {
     const fromInput = parseInt(document.querySelector(".fromInput").value);
-    debugger;
+    const toInput = parseInt(document.querySelector(".toInput").value);
   }
 }
 
