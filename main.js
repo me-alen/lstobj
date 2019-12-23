@@ -1,8 +1,10 @@
 let elementArray = [];
+
 function Transfer(leftList, rightList, buttons) {
   this.leftList = leftList;
   this.rightList = rightList;
   this.buttons = buttons;
+
   Array.from(leftList.children).forEach(event => {
     event.addEventListener("click", function() {
       elementArray.push(event);
@@ -15,10 +17,18 @@ function Transfer(leftList, rightList, buttons) {
       event.style.backgroundColor = "lightgreen";
     });
   });
+
   this.rightButton = buttons.querySelector(".right");
   this.leftButton = buttons.querySelector(".left");
   this.rightButton.addEventListener("click", moveRight);
   this.leftButton.addEventListener("click", moveLeft);
+  buttons
+    .querySelector(".rightInputButton")
+    .addEventListener("click", moveIndexToRight);
+  buttons
+    .querySelector(".leftInputButton")
+    .addEventListener("click", moveIndexToLeft);
+
   function moveRight() {
     elementArray.forEach(event => {
       rightList.appendChild(event);
@@ -34,20 +44,23 @@ function Transfer(leftList, rightList, buttons) {
     });
   }
 
-  buttons
-    .querySelector(".rightInputButton")
-    .addEventListener("click", moveIndexToRight);
-  buttons
-    .querySelector(".leftInputButton")
-    .addEventListener("click", moveIndexToLeft);
-
   function moveIndexToRight() {
     const fromInput = parseInt(document.querySelector(".fromInput").value);
     const toInput = parseInt(document.querySelector(".toInput").value);
+    Array.from(leftList.children)
+      .slice(fromInput - 1, toInput)
+      .forEach(event => {
+        rightList.appendChild(event);
+      });
   }
   function moveIndexToLeft() {
     const fromInput = parseInt(document.querySelector(".fromInput").value);
     const toInput = parseInt(document.querySelector(".toInput").value);
+    Array.from(rightList.children)
+      .slice(fromInput - 1, toInput)
+      .forEach(event => {
+        leftList.appendChild(event);
+      });
   }
 }
 

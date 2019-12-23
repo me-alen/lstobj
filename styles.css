@@ -6,6 +6,7 @@
   grid-gap: 5%;
 }
 ul {
+  background-color: bisque;
   text-align: center;
   list-style-type: none;
   border: 1px solid black;
