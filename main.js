@@ -70,17 +70,22 @@ function Transfer(leftList, rightList, buttons, elementAddButton) {
   function addNewElement() {
     const inputValue = elementAddButton.querySelector(".newListInput").value;
     const listNo = elementAddButton.querySelector("select").value;
-    switch (listNo) {
-      case "list1":
-        const html = `<li></li>`;
-        break;
-      case "list2":
-        break;
-      case "list3":
-        break;
-
-      default:
-        break;
+    let newListElement = document.createElement("li");
+    newListElement.textContent = inputValue;
+    if (newListElement === null) {
+      switch (listNo) {
+        case "list1":
+          document.querySelector(".ullist1").appendChild(newListElement);
+          break;
+        case "list2":
+          document.querySelector(".ullist2").appendChild(newListElement);
+          break;
+        case "list3":
+          document.querySelector(".ullist3").appendChild(newListElement);
+          break;
+        default:
+          break;
+      }
     }
   }
 }
@@ -95,6 +100,5 @@ const firstPairList = new Transfer(
 const secondPairList = new Transfer(
   document.querySelector(".ullist2"),
   document.querySelector(".ullist3"),
-  document.querySelector(".buttons23"),
-  document.querySelector(".newElementInput")
+  document.querySelector(".buttons23")
 );
